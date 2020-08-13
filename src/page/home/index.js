@@ -61,7 +61,7 @@ class Home extends React.Component {
 }
 
 
-const mapStateToProps = ({ HOME }) => {
+const mapStateToProps = ({HOME}) => {
     return {
         collapsed: HOME.collapsed,
 
