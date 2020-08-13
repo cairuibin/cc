@@ -6,9 +6,9 @@ import RouterView from '../../router/router_view'
 import OBreadcrumb from '../../components/Breadcrumb'
 import './index.less'
 import { Redirect } from 'react-router-dom';
-import SiderLogo from '../../components/SiderLogo'
+import SiderLogo from '../../components/SiderLogo';
+
 const { Header, Sider, Content } = Layout;
-@bon
 class Home extends React.Component {
     render() {
         return (<>
