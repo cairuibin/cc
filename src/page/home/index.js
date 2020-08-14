@@ -6,21 +6,15 @@ import RouterView from '../../router/router_view'
 import OBreadcrumb from '../../components/Breadcrumb'
 import './index.less'
 import { Redirect } from 'react-router-dom';
-<<<<<<< HEAD
 import SiderLogo from '../../components/SiderLogo';
-
-const { Header, Sider, Content } = Layout;
-=======
-import SiderLogo from '../../components/SiderLogo'
 import OHeader from '../../components/Header'
 const { Sider, Content } = Layout;
 
->>>>>>> f5854101fa784d934875d86fb8a7a5fc848f69f4
 class Home extends React.Component {
     render() {
         return (<>
             {
-                localStorage.getItem('auth') ? <Layout style={{ height: "100%" }}>
+                localStorage.getItem('userInfo') ? <Layout style={{ height: "100%" }}>
                     <Sider trigger={null} collapsible collapsed={this.props.collapsed}>
                         <SiderLogo></SiderLogo>
                         <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
