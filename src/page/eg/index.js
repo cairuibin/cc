@@ -1,16 +1,18 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { A } from '../../store/OBS/eg/action'
+import OTable from '../../components/Table'
 class EG extends Component {
     render() {
         return (
             <div>
-                <button onClick={() => {
+                {/* <button onClick={() => {
                     this.props.changeArr('好爱好爱你')
                 }} >
                     {this.props.arr}
 
-                </button>
+                </button> */}
+                <OTable />
             </div>
         )
     }

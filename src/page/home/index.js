@@ -8,14 +8,13 @@ import './index.less'
 import { Redirect } from 'react-router-dom';
 import SiderLogo from '../../components/SiderLogo';
 import OHeader from '../../components/Header'
-
-const { Header, Sider, Content } = Layout;
+const { Sider, Content } = Layout;
 
 class Home extends React.Component {
     render() {
         return (<>
             {
-                localStorage.getItem('auth') ? <Layout style={{ height: "100%" }}>
+                localStorage.getItem('userInfo') ? <Layout style={{ height: "100%" }}>
                     <Sider trigger={null} collapsible collapsed={this.props.collapsed}>
                         <SiderLogo></SiderLogo>
                         <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>

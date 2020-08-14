@@ -14,7 +14,5 @@ let res = moduleFile.keys().reduce((prev, item) => {
 }, {});
 
 const reducer = combineReducers({ ...res })
-// const reducer = combineReducers({ EG,HOME })
-
 const store = createStore(reducer, applyMiddleware(thunk, logger))
 export default store
