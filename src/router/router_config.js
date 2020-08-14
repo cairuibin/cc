@@ -1,12 +1,15 @@
 
 import LoadableComponent from '../until/LoadableComponent'
-const EG = LoadableComponent(import('../page/eg'))
-const EG2 = LoadableComponent(import('../page/eg2/index2'))
-const Home = LoadableComponent(import('../page/home'))
-const Login = LoadableComponent(import('../page/login'))
-const NotFonnd = LoadableComponent(import('../page/notfound'))
+let moduleFile = require.context('../page', true, /\index.js$/);
+let result = moduleFile.keys().reduce((prev, item) => {
+    let son = moduleFile(item).default;
+    let str = item.split('/')[item.split('/').length - 2];
+    let name = str[0].toLocaleUpperCase() + str.slice(1);
+    prev = Object.assign({}, prev, { [name]: LoadableComponent(import('../page' + item.slice(1))) })
+    return prev
+}, {});
+console.log(result)
 export default [
-
     {
         name: "首页",
         path: "/",
@@ -15,7 +18,7 @@ export default [
     {
         name: "首页",
         path: "/home",
-        component: Home,
+        component: result.Home,
 
         children: [{
             name: "第二个",
@@ -25,25 +28,25 @@ export default [
         }, {
             name: "第二个",
             path: "/home/eg",
-            component: EG,
+            component: result.Eg,
 
         }, {
             name: "第二个",
             path: "/home/eg2",
-            component: EG2,
+            component: result.Eg2,
 
         }]
     },
     {
         name: "登录",
         path: "/login",
-        component: Login,
+        component: result.Login,
         exact: true
     },
     {
         name: "404",
         path: "/404",
-        component: NotFonnd,
+        component: result.Notfound,
     }
 ];
 

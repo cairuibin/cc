@@ -11,7 +11,6 @@ let res = moduleFile.keys().reduce((prev, item) => {
     prev = Object.assign({}, prev, { [name]: son })
     return prev
 }, {});
-console.log(res)
 
 const reducer = combineReducers({ ...res })
 const store = createStore(reducer, applyMiddleware(thunk, logger))
