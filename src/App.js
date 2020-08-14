@@ -4,7 +4,6 @@ import { HashRouter } from 'react-router-dom'
 import store from './store'
 import RouterView from './router/router_view'
 import routers from './router/router_config'
-import './config/page_output';
 
 export default class App extends Component {
   render() {

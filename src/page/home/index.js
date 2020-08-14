@@ -6,16 +6,11 @@ import RouterView from '../../router/router_view'
 import OBreadcrumb from '../../components/Breadcrumb'
 import './index.less'
 import { Redirect } from 'react-router-dom';
-<<<<<<< HEAD
 import SiderLogo from '../../components/SiderLogo';
+import OHeader from '../../components/Header'
 
 const { Header, Sider, Content } = Layout;
-=======
-import SiderLogo from '../../components/SiderLogo'
-import OHeader from '../../components/Header'
-const { Sider, Content } = Layout;
 
->>>>>>> f5854101fa784d934875d86fb8a7a5fc848f69f4
 class Home extends React.Component {
     render() {
         return (<>
