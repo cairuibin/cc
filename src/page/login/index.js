@@ -4,7 +4,6 @@ import { Form, Input, Button, Checkbox, message } from 'antd'
 import { withRouter, Link } from 'react-router-dom'
 import { LOGIN_SUBMITFN } from '../../store/OBS/login/action'
 import { login } from '../../api/login'
-import { setToken } from '../../until/token'
 import md5 from "js-md5"
 import './index.less'
 const FormItem = Form.Item
