@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { A } from '../../store/OBS/eg/action'
 import OTable from '../../components/Table'
+import './index.scss';
 class EG extends Component {
     render() {
         return (
@@ -12,6 +13,9 @@ class EG extends Component {
                     {this.props.arr}
 
                 </button> */}
+                <h2>
+                    <span>123</span>
+                </h2>
                 <OTable />
             </div>
         )

@@ -4,13 +4,31 @@ import { SET_COLLAPSED_FN } from '../../store/OBS/home/action'
 import { Layout, Menu, Icon } from 'antd';
 import RouterView from '../../router/router_view'
 import OBreadcrumb from '../../components/Breadcrumb'
-import './index.less'
+import './index.scss'
 import { Redirect } from 'react-router-dom';
 import SiderLogo from '../../components/SiderLogo';
 import OHeader from '../../components/Header'
 const { Sider, Content } = Layout;
 
-class Home extends React.Component {
+const mapStateToProps = ({HOME}) => {
+
+    return {
+        collapsed: HOME.collapsed,
+
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        change: (value) => {
+            dispatch(SET_COLLAPSED_FN(value));
+        }
+    };
+}
+
+
+
+export default connect(mapStateToProps,mapDispatchToProps) (class Home extends React.Component {
     render() {
         return (<>
             {
@@ -43,22 +61,5 @@ class Home extends React.Component {
             }
         </>)
     }
-}
+})
 
-
-const mapStateToProps = ({HOME}) => {
-    return {
-        collapsed: HOME.collapsed,
-
-    }
-}
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        change: (value) => {
-            dispatch(SET_COLLAPSED_FN(value));
-        }
-    };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home);

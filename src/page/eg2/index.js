@@ -33,9 +33,9 @@ const mapStateToProps = ({ EG }) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         changeAsyncArr: async (value) => {
-            let data = await login()
+            // let data = await login()
 
-            dispatch(B([data]));
+            // dispatch(B([data]));
 
         }
     };

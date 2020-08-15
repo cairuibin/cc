@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import './index.less'
+import './index.scss'
 class SiderLogo extends Component {
     render() {
         return (

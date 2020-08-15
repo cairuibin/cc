@@ -2,7 +2,6 @@
 import LoadableComponent from '../until/LoadableComponent'
 let moduleFile = require.context('../page', true, /\index.js$/);
 let result = moduleFile.keys().reduce((prev, item) => {
-    let son = moduleFile(item).default;
     let str = item.split('/')[item.split('/').length - 2];
     let name = str[0].toLocaleUpperCase() + str.slice(1);
     prev = Object.assign({}, prev, { [name]: LoadableComponent(import('../page' + item.slice(1))) })
@@ -19,7 +18,6 @@ export default [
         name: "首页",
         path: "/home",
         component: result.Home,
-
         children: [{
             name: "第二个",
             path: "/home",

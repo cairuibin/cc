@@ -5,10 +5,10 @@ const path=require('path')
 const { override, addDecoratorsLegacy, addLessLoader,addWebpackAlias } = require("customize-cra");
 module.exports = override(
 
-  addLessLoader({
-    javascriptEnabled: true,
-    modifyVars: {},
-  }),
+  // addLessLoader({
+  //   javascriptEnabled: true,
+  //   modifyVars: {},
+  // }),
   addDecoratorsLegacy(),
   addWebpackAlias({
     "@": path.resolve("src/"),
