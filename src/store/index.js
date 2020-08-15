@@ -2,8 +2,7 @@
 import { applyMiddleware, createStore, combineReducers } from 'redux'
 import thunk from 'redux-thunk'
 import logger from 'redux-logger'
-// import EG from './OBS/eg'
-// import HOME from './OBS/home'
+
 
 let moduleFile = require.context('./OBS', true, /\index.js$/);
 let res = moduleFile.keys().reduce((prev, item) => {
