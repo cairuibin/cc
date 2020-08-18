@@ -1,16 +1,35 @@
 import React, { Component } from 'react'
-import {  Breadcrumb, Card } from 'antd';
+import { Breadcrumb, Card } from 'antd';
+import routerList from '@/router/router_config.js';
+
+
+
+
+
 class OBreadcrumb extends Component {
+    componentDidMount() {
+    }
+    getCrm = () => {
+        this.setState({})
+    }
     render() {
+        let path = this.props.location.pathname;
+        let one = routerList.filter(e => e.component).find(v => path.includes(v.path)).children.find(j => path.includes(j.path));
+        let two = one.children.find(v => v.path === path);
+        let arr = [one, two]
         return (
-            <Card   style={{
+            <Card style={{
                 margin: '10px 16px 0 16px',
                 background: '#fff',
             }}>
                 <Breadcrumb >
-                    <Breadcrumb.Item>Home</Breadcrumb.Item>
-                    <Breadcrumb.Item>List</Breadcrumb.Item>
-                    <Breadcrumb.Item>App</Breadcrumb.Item>
+                    {
+                        arr.length && arr.map(v => {
+                            if (v) {
+                                return <Breadcrumb.Item className='pointer' onClick={() => this.props.history.push(v.path)}>{v.name}</Breadcrumb.Item>
+                            }
+                        })
+                    }
                 </Breadcrumb>
             </Card>
         )
