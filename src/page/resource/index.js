@@ -115,7 +115,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(class Resource exten
                     <Menu theme="dark" mode="inline" openKeys={['sub1', 'sub2', 'sub3']}>
                         {
                             menuList.map((v => {
-                                return <SubMenu key={v.key} title={v.parentTitle}>
+                                return <SubMenu key={v.key} title={v.parentTitle} >
                                     {
                                         v.children && v.children.map(k => {
                                             return <Menu.Item onClick={() => this.jump(k.path)} key={k.key}>

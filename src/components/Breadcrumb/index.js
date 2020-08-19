@@ -26,7 +26,7 @@ class OBreadcrumb extends Component {
                     {
                         arr.length && arr.map(v => {
                             if (v) {
-                                return <Breadcrumb.Item className='pointer' onClick={() => this.props.history.push(v.path)}>{v.name}</Breadcrumb.Item>
+                                return <Breadcrumb.Item className='pointer' key={v.path} onClick={() => this.props.history.push(v.path)}>{v.name}</Breadcrumb.Item>
                             }
                         })
                     }

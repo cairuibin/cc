@@ -3,7 +3,7 @@ import React from 'react';
 import './index.scss';
 import { connect } from 'react-redux';
 import { AAA} from '@store/OBS/grounding/action'
-import { Button } from 'antd';
+import { Card } from 'antd';
 
 
 const mapStateToProps = ({GROUNDING}) => {
@@ -22,9 +22,11 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(mapStateToProps, mapDispatchToProps) (class Grounding extends React.Component {
     render() {
         return (
-            <div>   
-                Grounding
-            </div>
+            <>   
+               <Card>
+                  11
+               </Card>
+            </>
         )
     }
 })

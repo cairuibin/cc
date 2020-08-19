@@ -22,9 +22,11 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(mapStateToProps, mapDispatchToProps) (class Sanshi extends React.Component {
     render() {
         return (
-            <div>   
-                Sanshi
+            <div width='100%' >   
+               111111111111111111111111111111111111111111
             </div>
         )
     }
 })
+
+
