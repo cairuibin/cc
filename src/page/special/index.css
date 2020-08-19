@@ -1,0 +1,95 @@
+.special_box {
+  width: 100%;
+}
+
+.special_box .top {
+  width: 100%;
+  height: 60px;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.special_box .top .add_btn {
+  margin-right: 30px;
+}
+
+.special_box .top .sort {
+  cursor: pointer;
+}
+
+.special_box .top .top_r {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.special_box .top .top_r .ant-input {
+  width: 50%;
+  margin-right: 20px;
+}
+
+.special_box .top .top_r .reset_btn {
+  margin-right: 12px;
+}
+
+.special_box .alert {
+  width: 100%;
+  height: 30px;
+  background: rgba(16, 92, 251, 0.06);
+  color: #3e78ed;
+  font-size: 12px;
+  line-height: 30px;
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0px;
+}
+
+.special_box .alert span:nth-child(1) {
+  margin-left: 20px;
+}
+
+.special_box .alert span:nth-child(2) {
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.special_box .none-tab-icon .ant-table-row-expand-icon-cell {
+  cursor: pointer;
+}
+
+.special_box tr.ant-table-expanded-row,
+.special_box tr.ant-table-expanded-row:hover {
+  background: #fff;
+}
+
+.special_box .ant-table-tbody > tr:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected) > td {
+  background: #F7F9FB;
+}
+
+.special_box .action {
+  color: #3E78ED;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.special_box .ant-table-wrapper {
+  border: 1px solid #F3F3F3;
+}
+
+.special_box tr.drop-over-downward td {
+  border-bottom: 2px dashed #1890ff;
+}
+
+.special_box tr.drop-over-upward td {
+  border-top: 2px dashed #1890ff;
+}
+
+.modal_box .ant-modal-content {
+  width: 660px !important;
+}
+
+.modal_box .ant-col-5 {
+  text-align: center;
+}
+
+.modal_box .ant-form-explain {
+  padding-left: 21%;
+}
