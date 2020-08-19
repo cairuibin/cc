@@ -2,7 +2,12 @@ import React, { Component } from 'react'
 import { Breadcrumb, Card } from 'antd';
 import routerList from '@/router/router_config.js';
 
-
+let style = {
+    color: '#333333',
+    fontSize: '20px',
+    marginTop: '15px',
+    fontWeight:'bold'
+}
 
 
 
@@ -11,6 +16,12 @@ class OBreadcrumb extends Component {
     }
     getCrm = () => {
         this.setState({})
+    }
+    jump = (path) => {
+        if (path === this.props.location.pathname) {
+            return;
+        }
+        this.props.history.push(path);
     }
     render() {
         let path = this.props.location.pathname;
@@ -26,11 +37,14 @@ class OBreadcrumb extends Component {
                     {
                         arr.length && arr.map(v => {
                             if (v) {
-                                return <Breadcrumb.Item className='pointer' key={v.path} onClick={() => this.props.history.push(v.path)}>{v.name}</Breadcrumb.Item>
+                                return <Breadcrumb.Item className='pointer' onClick={() => this.jump(v.path)}>{v.name}</Breadcrumb.Item>
                             }
                         })
                     }
                 </Breadcrumb>
+                {
+                    arr[1] && <h2 style={style}>{arr[1].name}</h2>
+                }
             </Card>
         )
     }

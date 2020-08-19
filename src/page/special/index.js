@@ -5,8 +5,9 @@ import { connect } from 'react-redux';
 // import { AAA } from '@store/OBS/special/action';
 import { Button, Input, Col, Table, Modal, Row, Form } from 'antd';
 import { component } from '@/components/dragTable';
-import {HTML5Backend} from 'react-dnd-html5-backend';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 import update from 'immutability-helper';
+import kindName from 'classnames';
 import { DndProvider } from 'react-dnd';
 
 
@@ -29,6 +30,7 @@ class Special extends React.Component {
         visibily: false,
         expandedRowKeys: [],
         isActive: true,
+        isDrab: false,
         dataSource: [
             { id: 1, name: 'John Brown', age: 32, address: 'New York No. 1 Lake Park', description: 'My name is John Brown, I am 32 years old, living in New York No. 1 Lake Park.' },
             { id: 2, name: 'Jim Green', age: 42, address: 'London No. 1 Lake Park', description: 'My name is Jim Green, I am 42 years old, living in London No. 1 Lake Park.' },
@@ -47,6 +49,7 @@ class Special extends React.Component {
         this.setState({
             expandedRowKeys: filtered,
         });
+        console.log(filtered)
     }
     //取消
     canale = () => {
@@ -69,6 +72,7 @@ class Special extends React.Component {
     add = () => {
         this.setState({ visibily: true });
     }
+    //拖拽事件
     moveRow = (dragIndex, hoverIndex) => {
         const { dataSource } = this.state;
         const dragRow = dataSource[dragIndex];
@@ -82,10 +86,43 @@ class Special extends React.Component {
             hasChanged: true,
         });
     };
+    //禁止拖拽
+    forbidDataDrafting = (val) => {
+        document.ondragstart = function () {
+            return val;
+        };
+    }
+    componentDidMount() {
+        this.forbidDataDrafting(false);
+    }
+    sort = () => {
+        this.forbidDataDrafting(true);
+        this.setState({ isDrab: true });
+    }
+    //取消排序
+    cancelSort = () => {
+        this.forbidDataDrafting(false);
+        this.setState({ isDrab: false });
+    }
+    //保存排序
+    saveSort = () => {
+        this.forbidDataDrafting(false);
+        this.setState({ isDrab: false });
+    }
+    //全部展开
+    changeAll = (type) => {    //type  = 1? 全部展开 :全部折叠
+        if (type === 1) {
+            let { expandedRowKeys, dataSource } = this.state;
+            expandedRowKeys = dataSource.map(v => v.id);
+            this.setState({ expandedRowKeys });
+        } else if (type === 2) {
+            this.setState({ expandedRowKeys: [] });
+        }
+    }
     render() {
         const sp = <span>0/15</span>;
         const sonSp = <span>0/15</span>;
-        const { value, expandedRowKeys, visibily, isActive, dataSource } = this.state;
+        const { value, expandedRowKeys, visibily, isActive, dataSource, isDrab } = this.state;
         const { getFieldDecorator } = this.props.form;
         const columns = [
             { title: '专题名称', dataIndex: 'name', key: 'name' },
@@ -102,15 +139,28 @@ class Special extends React.Component {
 
         return (
             <div className='special_box'>
-                <div className="top">
+                <div className="top" style={{ display: isDrab ? 'none' : 'flex' }}>
                     <Col span={12}>
-                        <Button className='add_btn' type='primary' onClick={this.add}>添加专题</Button>
-                        <span className='sort'>🐕 专题排序</span>
+                        <Button className='sure_sort' type='primary' onClick={this.add}>添加专题</Button>
+                        <span className='sort' onClick={this.sort}>🐕 专题排序</span>
                     </Col>
                     <Col className='top_r' span={12}>
                         <Input placeholder='请输入专题或子题的专题名称' />
                         <Button className='reset_btn'>重置</Button>
                         <Button type='primary'>查询</Button>
+                    </Col>
+                </div>
+                <div className="top" style={{ display: isDrab ? 'flex' : 'none' }}>
+                    <Col span={12}>
+                        <Button className='sure_sort' type='primary' onClick={this.saveSort}>保存排序</Button>
+                        <Button className='cancel_sort' onClick={this.cancelSort}>取消排序</Button>
+                        <span className='save'>🐕拖拽后请保存</span>
+                    </Col>
+                    <Col className='top_r' span={12}>
+                        <p className='vertical_j trans'>
+                            <span onClick={() => this.changeAll(2)}>全部折叠</span>
+                            <span onClick={() => this.changeAll(1)}>全部展开</span>
+                        </p>
                     </Col>
                 </div>
                 <div className="alert" style={{ display: isActive ? 'flex' : 'none' }}>
@@ -124,7 +174,8 @@ class Special extends React.Component {
                 <div className="special_container">
                     <DndProvider backend={HTML5Backend}>
                         <Table
-                            pagination={false}  
+                            className={kindName('drab_table', { 'active_drab_table': isDrab })}
+                            pagination={false}
                             columns={columns}
                             rowKey={(record) => record.id}
                             dataSource={dataSource}

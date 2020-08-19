@@ -104,6 +104,9 @@ const menuList = [
 
 export default connect(mapStateToProps, mapDispatchToProps)(class Resource extends React.Component {
     jump = (path) => {
+        if (path === this.props.location.pathname) {
+            return;
+        }
         this.crumb.getCrm();
         this.props.history.push(path);
     }

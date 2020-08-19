@@ -4,6 +4,9 @@
     width: 100%;
     height: 60px;
     border-bottom: 1px solid #eeeeee;
+    line-height: 60px;
+    display: flex;
+    align-items: center;
     .add_btn {
       margin-right: 30px;
     }
@@ -50,35 +53,54 @@
   }
   tr.ant-table-expanded-row,
   tr.ant-table-expanded-row:hover {
-      background: #fff;
+    background: #fff;
   }
-  .ant-table-tbody > tr:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected) > td{
-      background: #F7F9FB;;
+  .ant-table-tbody
+    > tr:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected)
+    > td {
+    background: #f7f9fb;
   }
-  .action{
-      color: #3E78ED;
-      font-size: 14px;
-      cursor: pointer;
+  .action {
+    color: #3e78ed;
+    font-size: 14px;
+    cursor: pointer;
   }
-  .ant-table-wrapper{
-    border: 1px solid #F3F3F3;
+  .ant-table-wrapper {
+    border: 1px solid #f3f3f3;
   }
   tr.drop-over-downward td {
     border-bottom: 2px dashed #1890ff;
   }
-  
+
   tr.drop-over-upward td {
     border-top: 2px dashed #1890ff;
   }
+  .drab_table {
+    .ant-table-row {
+      cursor: default !important;
+    }
+  }
+  .active_drab_table {
+    .ant-table-tbody .ant-table-row {
+      cursor: move !important;
+    }
+  }
+  .trans{
+    span{
+      color: #3E78ED;
+      font-size: 14px;
+      cursor: pointer;
+    }
+  }
 }
-.modal_box{
-    .ant-modal-content{
-        width: 660px !important;
-    }
-    .ant-col-5{
-        text-align: center;
-    }
-    .ant-form-explain{
-        padding-left: 21%;
-    }
+.modal_box {
+  .ant-modal-content {
+    width: 660px !important;
+  }
+  .ant-col-5 {
+    text-align: center;
+  }
+  .ant-form-explain {
+    padding-left: 21%;
+  }
 }
