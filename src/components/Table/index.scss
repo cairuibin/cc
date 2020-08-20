@@ -1,0 +1,17 @@
+.ant-table-thead > tr > th .ant-table-column-sorter .ant-table-column-sorter-inner .ant-table-column-sorter-up.on{
+    color: #333333 !important;
+}
+.ant-table-thead > tr > th .ant-table-column-sorter .ant-table-column-sorter-inner .ant-table-column-sorter-down.on{
+    color: #333333 !important;
+}
+.global_table{
+    .ant-table-thead{
+        tr{
+            th:nth-child(1){
+                span{
+                    display: none;
+                }
+            }
+        }
+    }
+}

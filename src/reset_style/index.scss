@@ -1,9 +1,23 @@
-#root{
+#root {
     min-width: 1200px;
     max-width: 1600px;
     margin: 0 auto;
 }
 
-.ant-layout-sider{
+.ant-layout-sider {
     background: #fff;
+
+}
+
+.ant-table-pagination {
+    li {
+        border: none;
+    }
+
+    .ant-pagination-next,
+    .ant-pagination-prev {
+        a {
+            border: none;
+        }
+    }
 }

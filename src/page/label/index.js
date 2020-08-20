@@ -9,17 +9,18 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import update from 'immutability-helper';
 import kindName from 'classnames';
 import { DndProvider } from 'react-dnd';
+import MyTable from '@/components/Table';
 
 
-const mapStateToProps = ({LABEL}) => {
+const mapStateToProps = ({ LABEL }) => {
     return {
-    
+
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-    
+
     };
 }
 
@@ -93,7 +94,7 @@ class Label extends React.Component {
         };
     }
     componentDidMount() {
-        this.forbidDataDrafting(false);
+        // this.forbidDataDrafting(false);
     }
     sort = () => {
         this.forbidDataDrafting(true);
@@ -116,7 +117,13 @@ class Label extends React.Component {
         const { getFieldDecorator } = this.props.form;
         const columns = [
             { title: '标签名称', dataIndex: 'name', key: 'name' },
-            { title: '更新时间', dataIndex: 'age', key: 'age' },
+            {
+                title: '更新时间', dataIndex: 'age', key: 'age',
+                sorter: {
+                    compare: (a, b) => a.math - b.math,
+                    multiple: 2,
+                },
+            },
             {
                 title: '操作', dataIndex: 'address', key: 'address',
                 render: () => <p className='action vertical_j'>
@@ -127,7 +134,7 @@ class Label extends React.Component {
         ];
 
         return (
-            <div className='special_box'>
+            <div className='special_box bg_fff p20'>
                 <div className="top" style={{ display: isDrab ? 'none' : 'flex' }}>
                     <Col span={12}>
                         <Button className='sure_sort' type='primary' onClick={this.add}>添加标签</Button>
@@ -151,17 +158,19 @@ class Label extends React.Component {
                 </div> */}
                 <div className="special_container">
                     <DndProvider backend={HTML5Backend}>
-                        <Table
-                            className={kindName('drab_table', { 'active_drab_table': isDrab })}
-                            pagination={false}
-                            columns={columns}
-                            rowKey={(record) => record.id}
-                            dataSource={dataSource}
-                            components={component}
-                            onRow={(record, index) => ({
-                                index,
-                                moveRow: this.moveRow,
-                            })}
+                        <MyTable
+                            isDrab={true}
+                            options={
+                                {
+                                    columns,
+                                    dataSource,
+                                    onRow: (record, index) => ({
+                                        index,
+                                        moveRow: this.moveRow,
+                                    }),
+                                    pagination:false
+                                }
+                            }
                         />
                     </DndProvider>
                 </div>
@@ -206,5 +215,5 @@ class Label extends React.Component {
 
 
 Label = connect(mapStateToProps, mapDispatchToProps)(Label);
-Label = Form.create()(Label)
+Label = Form.create()(Label);
 export default Label;
