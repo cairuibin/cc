@@ -91,18 +91,18 @@ class Check extends React.Component {
         const { columns, selectedRowKeys, activeIndex, dataSource } = this.state;
         return (
             <div className='check_box'>
-                <div className="top m20 p20">
-                    <Col className='top_r' span={12}>
-                        <Input placeholder='请输入审核或子题的审核名称' />
-                        <Button className='reset_btn'>重置</Button>
-                        <Button type='primary' className='search'>查询</Button>
-                    </Col>
-                </div>
                 <div className="wrapper padd">
                     {/* <div className='tabs'>
                         <Tag onClick={() => this.callBack(0)} className={kindName({ 'active': activeIndex == 0 })}>专题资源（20）</Tag>
                         <Tag onClick={() => this.callBack(1)} className={kindName({ 'active': activeIndex == 1 })}>专业资源（20）</Tag>
                     </div> */}
+                    <div className="top">
+                        <Col className='top_r' span={12}>
+                            <Input placeholder='请输入审核或子题的审核名称' />
+                            <Button className='reset_btn'>重置</Button>
+                            <Button type='primary' className='search'>查询</Button>
+                        </Col>
+                    </div>
                     <div className="check_container" style={{ position: 'relative' }}>
                         <MyTable
                             className='table_h'

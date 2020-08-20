@@ -134,6 +134,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(class Recommend exte
                                         onRow: (record, index) => ({
                                             index,
                                             moveRow: this.moveRow,
+                                            onClick:()=>this.props.history.push('/transResource/recommend')
                                         })
                                     }
                                 }

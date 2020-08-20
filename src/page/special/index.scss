@@ -102,6 +102,9 @@
       background: #3e78ed;
     }
   }
+  .special_container .ant-table-body{
+    min-height: calc(100vh - 295px);
+  }
 }
 .modal_box {
   .ant-modal-content {
