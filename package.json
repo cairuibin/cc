@@ -29,6 +29,7 @@
     "wangeditor": "^3.1.1"
   },
   "scripts": {
+  
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-scripts test"

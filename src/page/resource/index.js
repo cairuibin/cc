@@ -115,7 +115,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(class Resource exten
             localStorage.getItem('userInfo') ? <Layout className='resource_box'>
                 <Sider trigger={null} collapsible collapsed={this.props.collapsed}>
                     {/* <SiderLogo></SiderLogo> */}
-                    <Menu theme="dark" mode="inline" openKeys={['sub1', 'sub2', 'sub3']}>
+                    <Menu  mode="inline" openKeys={['sub1', 'sub2', 'sub3']}>
                         {
                             menuList.map((v => {
                                 return <SubMenu key={v.key} title={v.parentTitle} >
