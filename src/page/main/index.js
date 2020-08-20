@@ -9,9 +9,9 @@ import KindName from 'classnames';
 
 
 const mapStateToProps = ({ MAIN }) => {
-    const { activeKey } = MAIN;
+    const { activeKey,headerMenuList } = MAIN;
     return {
-        activeKey
+        activeKey,headerMenuList
     }
 }
 
@@ -23,28 +23,20 @@ const mapDispatchToProps = (dispatch) => {
     };
 }
 
-const arr = [{
-    path: "/main/resource",
-    key: "0",
-    name: "资源"
-}, {
-    path: "/main/sanshi",
-    key: "1",
-    name: "直播"
-}]
+
 export default connect(mapStateToProps, mapDispatchToProps)(class Main extends React.Component {
     change = (item) => {
         this.props.changeIndex(item.key);
         this.props.history.push(item.path);
     }
     render() {
-        const { activeKey } = this.props;
+        const { activeKey,headerMenuList } = this.props;
         return (
             <div className='main_container'>
                 <div className='header_menu'>
 
                     <img style={{ width: "149px", height: "50px", display: "block" }} src={require('../../assets/img/logo.png')} alt="" />
-                    {arr.map((v, i) => {
+                    {headerMenuList.map((v, i) => {
                         return <div key={i} className={KindName({ 'active': v.key === activeKey })} onClick={() => this.change(v)}>{v.name}</div>
                     })}
 
