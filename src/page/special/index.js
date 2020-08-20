@@ -9,7 +9,7 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import update from 'immutability-helper';
 import kindName from 'classnames';
 import { DndProvider } from 'react-dnd';
-
+import MyTable from '@/components/Table';
 
 
 const mapStateToProps = ({ SPECIAL }) => {
@@ -93,7 +93,7 @@ class Special extends React.Component {
         };
     }
     componentDidMount() {
-        this.forbidDataDrafting(false);
+        // this.forbidDataDrafting(false);
     }
     sort = () => {
         this.forbidDataDrafting(true);
@@ -138,7 +138,7 @@ class Special extends React.Component {
         ];
 
         return (
-            <div className='special_box'>
+            <div className='special_box bg_fff p20'>
                 <div className="top" style={{ display: isDrab ? 'none' : 'flex' }}>
                     <Col span={12}>
                         <Button className='sure_sort' type='primary' onClick={this.add}>添加专题</Button>
@@ -147,7 +147,7 @@ class Special extends React.Component {
                     <Col className='top_r' span={12}>
                         <Input placeholder='请输入专题或子题的专题名称' />
                         <Button className='reset_btn'>重置</Button>
-                        <Button type='primary'>查询</Button>
+                        <Button type='primary' className='search'>查询</Button>
                     </Col>
                 </div>
                 <div className="top" style={{ display: isDrab ? 'flex' : 'none' }}>
@@ -173,29 +173,29 @@ class Special extends React.Component {
                 </div>
                 <div className="special_container">
                     <DndProvider backend={HTML5Backend}>
-                        <Table
-                            className={kindName('drab_table', { 'active_drab_table': isDrab })}
-                            pagination={false}
-                            columns={columns}
-                            rowKey={(record) => record.id}
-                            dataSource={dataSource}
-                            components={component}
-                            onRow={(record, index) => ({
-                                index,
-                                moveRow: this.moveRow,
-                            })}
-
-                            expandedRowRender={record => (
-                                <p style={{ margin: 0 }}>{record.description}</p>
-                            )}
-                            expandIcon={({ expanded, onExpand, record }) =>
-                                expanded ? (
-                                    <span className='pointer' onClick={() => this.open(record)}>↑</span>
-                                ) : (
-                                        <span className='pointer' onClick={() => this.open(record)}>↓</span>
+                        <MyTable
+                            isDrab={true}
+                            options={
+                                {
+                                    columns,
+                                    dataSource,
+                                    isDrab: true,
+                                    onRow: (record, index) => ({
+                                        index,
+                                        moveRow: this.moveRow,
+                                    }),
+                                    expandIcon: ({ expanded, onExpand, record }) =>
+                                        expanded ? (
+                                            <span className='pointer' onClick={() => this.open(record)}>↑</span>
+                                        ) : (
+                                                <span className='pointer' onClick={() => this.open(record)}>↓</span>
+                                            ),
+                                    expandedRowKeys: expandedRowKeys,
+                                    expandedRowRender: record => (
+                                        <p style={{ margin: 0 }}>{record.description}</p>
                                     )
+                                }
                             }
-                            expandedRowKeys={expandedRowKeys}
                         />
                     </DndProvider>
                 </div>

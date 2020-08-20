@@ -85,11 +85,21 @@
       cursor: move !important;
     }
   }
-  .trans{
-    span{
-      color: #3E78ED;
+  .trans {
+    span {
+      color: #3e78ed;
       font-size: 14px;
       cursor: pointer;
+    }
+  }
+  .search {
+    background: #3e78ed;
+    border: solid 1px #3e78ed;
+    &:hover {
+      background: #3e78ed;
+    }
+    &:focus {
+      background: #3e78ed;
     }
   }
 }

@@ -5,7 +5,7 @@ var chokidar = require('chokidar'),
     fold = './src/page',
     fs = require('fs'),
     p = require('path');
-watcher = chokidar.watch(fold, {
+let watcher = chokidar.watch(fold, {
     ignored: /[\/\\]\./, persistent: true
 });
 let startTime = new Date().getTime();

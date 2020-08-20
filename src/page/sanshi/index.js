@@ -23,7 +23,7 @@ export default connect(mapStateToProps, mapDispatchToProps) (class Sanshi extend
     render() {
         return (
             <div>   
-                Sanshi
+               直播
             </div>
         )
     }

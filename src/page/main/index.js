@@ -27,7 +27,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(class Main extends R
             <div className='main_container'>
                 <div className='header_menu'>
                     <div onClick={() => this.props.history.push('/main/resource')}>资源</div>
-                    <div onClick={() => this.props.history.push('/main/sanshi')}>三十</div>
+                    <div onClick={() => this.props.history.push('/main/sanshi')}>直播</div>
                 </div>
                 <div className='container'>
                     <RouterView routers={this.props.routers} />

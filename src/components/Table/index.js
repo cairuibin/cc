@@ -1,145 +1,52 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { Table } from 'antd';
-import { DndProvider, DragSource, DropTarget } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
-import update from 'immutability-helper';
+/* eslint-disable no-lone-blocks */
+import React, { Component } from 'react'
+import { Table, Col, Pagination,Button } from 'antd';
+import { component } from '@/components/dragTable';
+import './index.scss';
+import { T } from 'antd/lib/upload/utils';
 
-let dragingIndex = -1;
+/**
+ * dataSource | Array 表格数据    必填
+ * columns | Array   表头       必填
+ * type | number 必填
+ * 
+ * type==1 最基本的表格，不能拖拽，没有筛选，没有checkbox
+ * 
+ * 
+ * type==2  可选中
+ * rowSelection | object
+ * rowSelection的子项   ↓
+ * 1.onChange(selectedRowKeys, selectedRows) | function  选中项发生变化时的回调
+ * 2.type | string 单选或多选 checkbox radio, 默认值checkbox
+ * 3.selectedRowKeys | Array 默认选中的值 加上此属性后会使table完全变成受控组件  
+ * 
+ * 
+ * type==3  列表可展开收起 受控组件 
+ * expandedRowKeys | Array 默认展开的项  必填
+ * expandIcon | function 自定义展开图标    展开收起需要提供方法，定义在图标上  必填
+ * expandedRowRender | function   	额外的展开行 必填
+ * 
+ * isDrab | boolean 需要拖拽表格时需加该属性
+ * moveRow | function 拖拽的方法
+ * scroll | object 表格是否可滚动  
+ */
 
-class BodyRow extends React.Component {
-    render() {
-        const { isOver, connectDragSource, connectDropTarget, moveRow, ...restProps } = this.props;
-        const style = { ...restProps.style, cursor: 'move' };
 
-        let { className } = restProps;
-        if (isOver) {
-            if (restProps.index > dragingIndex) {
-                className += ' drop-over-downward';
-            }
-            if (restProps.index < dragingIndex) {
-                className += ' drop-over-upward';
-            }
-        }
+export default class index extends Component {
+    change = () => {
 
-        return connectDragSource(
-            connectDropTarget(<tr {...restProps} className={className} style={style} />),
-        );
     }
-}
-
-const rowSource = {
-    beginDrag(props) {
-        dragingIndex = props.index;
-        return {
-            index: props.index,
-        };
-    },
-};
-
-const rowTarget = {
-    drop(props, monitor) {
-        const dragIndex = monitor.getItem().index;
-        const hoverIndex = props.index;
-        if (dragIndex === hoverIndex) {
-            return;
-        }
-        props.moveRow(dragIndex, hoverIndex);
-        monitor.getItem().index = hoverIndex;
-    },
-};
-
-const DragableBodyRow = DropTarget('row', rowTarget, (connect, monitor) => ({
-    connectDropTarget: connect.dropTarget(),
-    isOver: monitor.isOver(),
-}))(
-    DragSource('row', rowSource, connect => ({
-        connectDragSource: connect.dragSource(),
-    }))(BodyRow),
-);
-
-const columns = [
-    {
-        title: 'Name',
-        dataIndex: 'name',
-        key: 'name',
-    },
-    {
-        title: 'Age',
-        dataIndex: 'age',
-        key: 'age',
-    },
-    {
-        title: 'Address',
-        dataIndex: 'address',
-        key: 'address',
-    },
-];
-
-class DragSortingTable extends React.Component {
-    state = {
-        data: [
-            {
-                key: '1',
-                name: 'John Brown',
-                age: 32,
-                address: 'New York No. 1 Lake Park',
-            },
-            {
-                key: '2',
-                name: 'Jim Green',
-                age: 42,
-                address: 'London No. 1 Lake Park',
-            },
-        ],
-    };
-
-    components = {
-        body: {
-            row: DragableBodyRow,
-        },
-    };
-
-    moveRow = (dragIndex, hoverIndex) => {
-        const { data } = this.state;
-        const dragRow = data[dragIndex];
-        console.log(dragIndex, hoverIndex)
-        this.setState(
-            update(this.state, {
-                data: {
-                    $splice: [[dragIndex, 1], [hoverIndex, 0, dragRow]],
-                },
-            }),
-        );
-    };
-
     render() {
+        let { isDrab, options } = this.props;
         return (
-            <DndProvider backend={HTML5Backend}>
-                <Table
-                    columns={columns}
-                    dataSource={this.state.data}
-                    components={this.components}
-                    onRow={(record, index) => ({
-                        index,
-                        moveRow: this.moveRow,
-                    })}
-                />
-            </DndProvider>
-        );
+            <Table
+                rowKey={v => v.id}
+                components={isDrab ? component : 1}
+                {...options}
+            />
+        )
     }
 }
 
-const mapStateToProps = () => {
-    return {
 
 
-    }
-}
-
-const mapDispatchToProps = () => {
-    return {
-
-    };
-}
-export default connect(mapStateToProps, mapDispatchToProps)(DragSortingTable)

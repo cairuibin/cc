@@ -107,7 +107,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(class Resource exten
         if (path === this.props.location.pathname) {
             return;
         }
-        this.crumb.getCrm();
+        // this.crumb.getCrm();
         this.props.history.push(path);
     }
     render() {
@@ -133,8 +133,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(class Resource exten
                 </Sider>
                 <Layout>
                     {/* <OHeader /> */}
-                    <OBreadcrumb ref={e => this.crumb = e} {...this.props} />
-                    <Content style={{ margin: '10px 16px', padding: 24, background: '#fff', minHeight: 280, }}>
+                    {/* <OBreadcrumb ref={e => this.crumb = e} {...this.props} /> */}
+                    <Content style={{ margin: '10px 16px',   minHeight: 280, }}>
                         <RouterView routers={this.props.routers}></RouterView>
                     </Content>
                 </Layout>
