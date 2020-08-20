@@ -63,14 +63,14 @@
   border: solid 1px #3e78ed !important;
 }
 //保存按钮
-.save{
-  color: #3E78ED;
+.save {
+  color: #3e78ed;
   font-size: 12px;
 }
 
 //tab切换按钮
-.tabs{
-  .ant-tag{
+.tabs {
+  .ant-tag {
     padding: 10px 15px;
     font-size: 15px;
     cursor: pointer;
@@ -79,25 +79,51 @@
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
     background: #fff;
-    &.active{
-      color: #3E78ED;
+    &.active {
+      color: #3e78ed;
     }
   }
 }
 
-.padd{
-  padding: 16px 20px;
-  background-color: #fff;;
+.ant_blue{
+  background-color: #3E78ED !important;
+  border: solid 1px #3E78ED !important;
 }
 
-.p20{
+
+
+.padd {
+  padding: 16px 20px;
+  background-color: #fff;
+}
+
+.p20 {
   padding: 20px;
 }
 
-.m20{
+.m20 {
   margin-bottom: 20px;
 }
 
-.bg_fff{
+.bg_fff {
   background-color: #fff;
+}
+
+.batch_box {
+  position: absolute;
+  bottom: 16px;
+  left: 30px;
+  > span {
+    .ant-checkbox-wrapper {
+      margin-right: 10px;
+    }
+    color: #333333;
+  }
+  .ant-btn{
+    margin: 0px 10px;
+  }
+}
+
+.pos_r{
+  position: relative;
 }

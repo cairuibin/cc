@@ -1,0 +1,36 @@
+.recommend_box{
+    width: 100%;
+    .top{
+        display: flex;
+    }
+    .filter_box{
+        width: 100%;
+        height: 60px;
+        line-height: 60px;
+        display: flex;
+        align-items: center;
+        .add_btn {
+          margin-right: 30px;
+        }
+        .sort {
+          cursor: pointer;
+        }
+        .top_r {
+          display: flex;
+          justify-content: flex-end;
+          .ant-input {
+            width: 50%;
+            margin-right: 20px;
+          }
+          .reset_btn {
+            margin-right: 12px;
+          }
+        }
+    }
+    .container .ant-table-body{
+        min-height: calc(100vh - 338px);
+    }
+    .action{
+        color: #3E78ED;
+    }
+}

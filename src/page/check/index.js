@@ -4,7 +4,7 @@ import './index.scss';
 import { connect } from 'react-redux';
 import { AAA } from '@store/OBS/check/action';
 import './index.scss';
-import { Button, Input, Col, Table, Modal, Row, Form, Tag } from 'antd';
+import { Button, Input, Col, Checkbox, Modal, Row, Form, Tag, message } from 'antd';
 import kindName from 'classnames';
 import MyTable from '@/components/Table';
 
@@ -26,9 +26,7 @@ const mapDispatchToProps = (dispatch) => {
 class Check extends React.Component {
     state = {
         value: 'test',
-        visibily: false,
         expandedRowKeys: [],
-        isDrab: false,
         selectedRowKeys: [],
         activeIndex: 0,
         dataSource: [
@@ -55,41 +53,6 @@ class Check extends React.Component {
             }
         ]
     }
-    //展开 收起
-    open = (record) => {
-        const { id: key } = record;
-        const filtered = this.state.expandedRowKeys;
-        if (this.state.expandedRowKeys.includes(key)) {
-            filtered.splice(filtered.findIndex(element => element === key), 1);
-        } else {
-            filtered.push(key);
-        }
-        this.setState({
-            expandedRowKeys: filtered,
-        });
-        console.log(filtered)
-    }
-    //取消
-    canale = () => {
-        this.setState({ visibily: false });
-    }
-    //保存
-    save = () => {
-        this.props.form.validateFields((err, values) => {
-            if (!err) {
-                console.log(values)
-                this.setState({ visibily: false });
-            }
-        })
-    }
-    //编辑
-    edit = () => {
-        this.setState({ visibily: true });
-    }
-    //添加
-    add = () => {
-        this.setState({ visibily: true });
-    }
     change = (selectedRowKeys, selectedRows) => {
         console.log(selectedRowKeys)
         this.setState({ selectedRowKeys })
@@ -97,16 +60,38 @@ class Check extends React.Component {
     callBack = (index) => {
         this.setState({ activeIndex: index });
     }
+    //全选 反选
+    checkedAll = () => {
+        let { dataSource, selectedRowKeys } = this.state;
+        if (selectedRowKeys.length === dataSource.length) {
+            this.setState({ selectedRowKeys: [] });
+            return;
+        }
+        this.setState({ selectedRowKeys: dataSource.map(v => v.id) });
+    }
+    //批量通过
+    batchSure = () => {
+        let { selectedRowKeys } = this.state;
+        if (!selectedRowKeys.length) {
+            message.warning('请选择');
+            return;
+        }
+        console.log(selectedRowKeys)
+    }
+    //批量不通过
+    noBatchSure = () => {
+        let { selectedRowKeys } = this.state;
+        if (!selectedRowKeys.length) {
+            message.warning('请选择');
+            return;
+        }
+        console.log(selectedRowKeys)
+    }
     render() {
-        const sp = <span>0/15</span>;
-        const sonSp = <span>0/15</span>;
-        const { columns, selectedRowKeys, visibily, activeIndex, dataSource, isDrab } = this.state;
-        const { getFieldDecorator } = this.props.form;
-
+        const { columns, selectedRowKeys, activeIndex, dataSource } = this.state;
         return (
             <div className='check_box'>
-                <div className="top m20 p20"  style={{ display: isDrab ? 'none' : 'flex' }}>
-
+                <div className="top m20 p20">
                     <Col className='top_r' span={12}>
                         <Input placeholder='请输入审核或子题的审核名称' />
                         <Button className='reset_btn'>重置</Button>
@@ -114,13 +99,13 @@ class Check extends React.Component {
                     </Col>
                 </div>
                 <div className="wrapper padd">
-                    <div className='tabs'>
+                    {/* <div className='tabs'>
                         <Tag onClick={() => this.callBack(0)} className={kindName({ 'active': activeIndex == 0 })}>专题资源（20）</Tag>
                         <Tag onClick={() => this.callBack(1)} className={kindName({ 'active': activeIndex == 1 })}>专业资源（20）</Tag>
-                    </div>
-                    <div className="special_container">
+                    </div> */}
+                    <div className="check_container" style={{ position: 'relative' }}>
                         <MyTable
-                        className='table_h'
+                            className='table_h'
                             options={{
                                 columns,
                                 dataSource,
@@ -131,61 +116,19 @@ class Check extends React.Component {
                                 pagination: true
                             }}
                         />
+                        <div className="batch_box">
+                            <span>
+                                <Checkbox
+                                    checked={selectedRowKeys.length === dataSource.length ? true : false}
+                                    onChange={this.checkedAll}
+                                />
+                                <span>全选</span>
+                            </span>
+                            <Button className='ant_blue' onClick={this.batchSure} type='primary'>批量通过</Button>
+                            <Button onClick={this.noBatchSure}>批量不通过</Button>
+                        </div>
                     </div>
                 </div>
-                <Modal
-                    title='新建审核'
-                    wrapClassName='modal_box'
-                    visible={visibily}
-                    closable={false}
-                    footer={
-                        <div className='modal_btn_j'>
-                            <Button onClick={this.canale}>取消</Button>
-                            <Button onClick={this.save} type='primary'>保存</Button>
-                        </div>
-                    }
-                >
-                    <Form>
-                        <Form.Item>
-                            <Row>
-                                <Col span={5}>
-                                    <span><span className='red'>*</span>审核名称</span>
-                                </Col>
-                                <Col span={15}>
-                                    {
-                                        getFieldDecorator('name', {
-                                            rules: [
-                                                {
-                                                    required: true,
-                                                    message: '请输入审核名称'
-                                                }
-                                            ]
-                                        })(<Input placeholder='请输入审核名称' suffix={sp} />)
-                                    }
-                                </Col>
-                            </Row>
-                        </Form.Item>
-                        <Form.Item>
-                            <Row>
-                                <Col span={5}>
-                                    <span><span className='red'>*</span>子审核名称</span>
-                                </Col>
-                                <Col span={15}>
-                                    {
-                                        getFieldDecorator('sonName', {
-                                            rules: [
-                                                {
-                                                    required: true,
-                                                    message: '请输入子审核名称'
-                                                }
-                                            ]
-                                        })(<Input placeholder='请输入子审核名称' suffix={sonSp} />)
-                                    }
-                                </Col>
-                            </Row>
-                        </Form.Item>
-                    </Form>
-                </Modal>
             </div>
         )
     }
@@ -193,5 +136,4 @@ class Check extends React.Component {
 
 
 Check = connect(mapStateToProps, mapDispatchToProps)(Check);
-Check = Form.create()(Check)
 export default Check;

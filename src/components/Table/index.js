@@ -40,6 +40,7 @@ export default class index extends Component {
         let { isDrab, options } = this.props;
         return (
             <Table
+            className='global_table'
                 rowKey={v => v.id}
                 components={isDrab ? component : 1}
                 {...options}
