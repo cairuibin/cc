@@ -133,7 +133,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(class Resource exten
                 </Sider>
                 <Layout>
                     {/* <OHeader /> */}
-                    {/* <OBreadcrumb ref={e => this.crumb = e} {...this.props} /> */}
+                    <OBreadcrumb ref={e => this.crumb = e} {...this.props} />
                     <Content style={{ margin: '10px 16px',   minHeight: 280, }}>
                         <RouterView routers={this.props.routers}></RouterView>
                     </Content>

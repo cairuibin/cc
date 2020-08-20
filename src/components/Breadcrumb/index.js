@@ -6,7 +6,7 @@ let style = {
     color: '#333333',
     fontSize: '20px',
     marginTop: '15px',
-    fontWeight:'bold'
+    fontWeight: 'bold'
 }
 
 
@@ -29,11 +29,8 @@ class OBreadcrumb extends Component {
         let two = one.children.find(v => v.path === path);
         let arr = [one, two]
         return (
-            <Card style={{
-                margin: '10px 16px 0 16px',
-                background: '#fff',
-            }}>
-                <Breadcrumb >
+            <div style={{padding:'20px 30px 10px 30px'}}>
+                <Breadcrumb separator=">" >
                     {
                         arr.length && arr.map(v => {
                             if (v) {
@@ -42,10 +39,7 @@ class OBreadcrumb extends Component {
                         })
                     }
                 </Breadcrumb>
-                {
-                    arr[1] && <h2 style={style}>{arr[1].name}</h2>
-                }
-            </Card>
+            </div>
         )
     }
 }

@@ -1,1 +1,1 @@
-export const AAA = 'AAA'
+export const CHANGE_ACTIVE = 'CHANGE_ACTIVE'

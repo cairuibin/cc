@@ -1,8 +1,7 @@
 
 import reducers from './reducers'
 let defaultState = {
-    collapsed: false,
-
+    activeKey: sessionStorage.getItem('header_menu_key') ? sessionStorage.getItem('header_menu_key') : '0'
 }
 const Main = (state = defaultState, action) => {
     let Newstate = JSON.parse(JSON.stringify(state))
@@ -11,4 +10,3 @@ const Main = (state = defaultState, action) => {
 }
 
 export default Main
-    
