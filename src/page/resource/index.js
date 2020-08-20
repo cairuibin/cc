@@ -8,11 +8,12 @@ import OBreadcrumb from '../../components/Breadcrumb'
 import './index.scss'
 import { Redirect } from 'react-router-dom';
 import RouterView from '../../router/router_view';
+import routerList from '@/router/router_config.js';
 const { SubMenu } = Menu;
 const { Sider, Content } = Layout;
 
 const mapStateToProps = ({ RESOURCE }) => {
-    const {menuList} = RESOURCE;
+    const { menuList } = RESOURCE;
     return {
         menuList
     }
@@ -32,11 +33,22 @@ export default connect(mapStateToProps, mapDispatchToProps)(class Resource exten
         if (path === this.props.location.pathname) {
             return;
         }
-        // this.crumb.getCrm();
         this.props.history.push(path);
     }
     render() {
-        const {menuList} = this.props;
+        let path = this.props.location.pathname;
+        let { menuList } = this.props;
+        let one = routerList.filter(e => e.component).find(v => path.includes(v.path)).children.find(j => path.includes(j.path));
+        let two, three;
+        menuList.forEach(v => {
+            v.children && v.children.forEach(k => {
+                if (k.path === path) {
+                    two = v;
+                    three = k;
+                }
+            })
+        })
+        let arr = [{ ...one, title: one.name }, two, three];
         return (
             localStorage.getItem('userInfo') ? <Layout className='resource_box'>
                 <Sider trigger={null} collapsible collapsed={this.props.collapsed}>
@@ -59,8 +71,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(class Resource exten
                 </Sider>
                 <Layout>
                     {/* <OHeader /> */}
-                    <OBreadcrumb ref={e => this.crumb = e} {...this.props} />
-                    <Content style={{ margin: '10px 16px',   minHeight: 280, }}>
+                    <OBreadcrumb list={arr} ref={e => this.crumb = e} {...this.props} />
+                    <Content style={{ margin: '10px 16px', minHeight: 280, }}>
                         <RouterView routers={this.props.routers}></RouterView>
                     </Content>
                 </Layout>
