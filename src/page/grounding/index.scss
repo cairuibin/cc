@@ -1,0 +1,23 @@
+.grounding{
+    .navtop{
+        display: flex;
+        .left{
+            flex: 0.4;text-align: center;
+        }
+        .center{
+            flex: 6;
+            margin: 0 14px;
+            span{
+                display: inline-block;min-width: 70px;text-align: center;line-height: 30px;
+            }
+            span:hover{
+               color: #3E78ED;
+            }
+            
+        }
+        .right{
+            flex: 1.4; display: flex;justify-content: space-around;
+        }
+    }
+    
+}

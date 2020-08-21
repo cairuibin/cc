@@ -9,6 +9,17 @@
 
 }
 
+.ant-btn-primary {
+    background-color: #3E78ED;
+}
+
+.ant-btn-primary:hover,
+.ant-btn-primary:focus {
+    color: #fff;
+    background-color: #3E78ED;
+    border-color: #3E78ED;
+}
+
 .ant-table-pagination {
     li {
         border: none;
