@@ -5,8 +5,8 @@ let result = moduleFile.keys().reduce((prev, item) => {
     let str = item.split('/')[item.split('/').length - 2];
     let name = str[0].toLocaleUpperCase() + str.slice(1);
     let aa = moduleFile(item).default;
-    // prev = Object.assign({}, prev, { [name]: LoadableComponent(import('../page' + item.slice(1))) })
-    prev = Object.assign({}, prev, { [name]: aa })
+    prev = Object.assign({}, prev, { [name]: LoadableComponent(import('../page' + item.slice(1))) })
+    // prev = Object.assign({}, prev, { [name]: aa })
     return prev
 }, {});
 export default [
@@ -100,6 +100,16 @@ export default [
         name: "404",
         path: "/404",
         component: result.Notfound,
+    },
+    {
+        name: '资源详情',
+        path: '/resourceDetail',
+        component: result.ResourceDetail
+    },
+    {
+        name:'资源浏览通用',
+        path:'/transResource/:type',
+        component: result.TransResource
     }
 ];
 

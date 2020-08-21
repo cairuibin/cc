@@ -5,7 +5,6 @@ const Loading=()=>{
 }
 
 const LoadableComponent = (component, haveLoading = true, ) => {
-    // console.log(component)
     return Loadable({
         loader: () => component,
         loading: () => {

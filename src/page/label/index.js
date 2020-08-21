@@ -134,7 +134,7 @@ class Label extends React.Component {
         ];
 
         return (
-            <div className='special_box bg_fff p20'>
+            <div className='label_box bg_fff p20'>
                 <div className="top" style={{ display: isDrab ? 'none' : 'flex' }}>
                     <Col span={12}>
                         <Button className='sure_sort' type='primary' onClick={this.add}>添加标签</Button>
@@ -156,7 +156,7 @@ class Label extends React.Component {
                         X
                     </span>
                 </div> */}
-                <div className="special_container">
+                <div className="label_container">
                     <DndProvider backend={HTML5Backend}>
                         <MyTable
                             isDrab={true}

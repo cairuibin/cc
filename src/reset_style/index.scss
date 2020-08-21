@@ -22,13 +22,21 @@
 
 .ant-table-pagination {
     li {
-        border: none;
-    }
+        html body {
+            background-color: #f6f7fb;
+        }
 
-    .ant-pagination-next,
-    .ant-pagination-prev {
-        a {
-            border: none;
+        .ant-table-pagination {
+            li {
+                border: none;
+            }
+
+            .ant-pagination-next,
+            .ant-pagination-prev {
+                a {
+                    border: none;
+                }
+            }
         }
     }
 }

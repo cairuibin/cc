@@ -1,22 +1,15 @@
 import React, { Component } from 'react'
-import { Breadcrumb, Card } from 'antd';
-import routerList from '@/router/router_config.js';
+import { Breadcrumb } from 'antd';
+import KindName from 'classnames';
 
 let style = {
     color: '#333333',
     fontSize: '20px',
     marginTop: '15px',
-    fontWeight:'bold'
+    fontWeight: 'bold'
 }
 
-
-
-class OBreadcrumb extends Component {
-    componentDidMount() {
-    }
-    getCrm = () => {
-        this.setState({})
-    }
+export default class OBreadcrumb extends Component {
     jump = (path) => {
         if (path === this.props.location.pathname) {
             return;
@@ -24,29 +17,22 @@ class OBreadcrumb extends Component {
         this.props.history.push(path);
     }
     render() {
-        let path = this.props.location.pathname;
-        let one = routerList.filter(e => e.component).find(v => path.includes(v.path)).children.find(j => path.includes(j.path));
-        let two = one.children.find(v => v.path === path);
-        let arr = [one, two]
+
+        const { list=[] } = this.props;
         return (
-            <Card style={{
-                margin: '10px 16px 0 16px',
-                background: '#fff',
-            }}>
-                <Breadcrumb >
+            <div style={{ padding: '20px 30px 10px 30px' }}>
+                <Breadcrumb separator=">" >
                     {
-                        arr.length && arr.map(v => {
+                        list.length && list.map((v, i) => {
                             if (v) {
-                                return <Breadcrumb.Item className='pointer' onClick={() => this.jump(v.path)}>{v.name}</Breadcrumb.Item>
+                                return <Breadcrumb.Item key={i} className={v.path ? 'pointer' : 'default'} onClick={() => this.jump(v.path)}>
+                                    {v.title}
+                                </Breadcrumb.Item>
                             }
                         })
                     }
                 </Breadcrumb>
-                {
-                    arr[1] && <h2 style={style}>{arr[1].name}</h2>
-                }
-            </Card>
+            </div>
         )
     }
 }
-export default OBreadcrumb

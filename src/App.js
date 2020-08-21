@@ -5,8 +5,9 @@ import store from './store'
 import RouterView from './router/router_view'
 import routers from './router/router_config'
 import './reset_style/public.scss';
+import resetAntd from './config/antd_global';
 
-export default class App extends Component {
+class App extends Component {
   render() {
     return (
       <Provider store={store}>
@@ -17,3 +18,5 @@ export default class App extends Component {
     )
   }
 }
+App = resetAntd(App)
+export default  App

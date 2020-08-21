@@ -42,7 +42,14 @@ watcher.on('addDir', function (path) {
         // //_____________________________________________________________________
         if (!fs.existsSync(p.join(__dirname, storeSrc, name))) {
             fs.mkdirSync(p.join(__dirname, storeSrc, name));
-            fs.writeFileSync(p.join(__dirname, storeSrc, name, 'action.js'), "import { AAA } from './action_type'");
+            fs.writeFileSync(p.join(__dirname, storeSrc, name, 'action.js'), `
+import { AAA } from './action_type'
+export const AAAfn = (data) => ({
+    type: AAA,
+    data: data
+});
+            
+            `);
             fs.writeFileSync(p.join(__dirname, storeSrc, name, 'action_type.js'), "export const AAA = 'AAA'");
             fs.writeFileSync(p.join(__dirname, storeSrc, name, 'index.js'), reducerTem(newname));
             fs.writeFileSync(p.join(__dirname, storeSrc, name, 'reducers.js'), actionTem());

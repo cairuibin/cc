@@ -1,7 +1,9 @@
 .pointer {
   cursor: pointer;
 }
-
+.default{
+  cursor: default;
+}
 //添加子专题 | 编辑 | 删除
 .vertical_j {
   margin-bottom: 0;
@@ -90,7 +92,9 @@
   border: solid 1px #3E78ED !important;
 }
 
-
+.blue{
+  color:#3E78ED ;
+}
 
 .padd {
   padding: 16px 20px;
